@@ -1,6 +1,6 @@
 import { useStore } from "../context/StoreContext";
 import { dataArticles } from "../response";
-import { Card } from "./Card";
+import { Card } from "./ui/Card";
 import { AlertTriangle } from "lucide-react";
 
 type Product = {
@@ -74,7 +74,6 @@ export const Products = () => {
             }`
           : "0 resultados"}
       </div>
-      {/* Mensaje si no hay productos */}
       {!hasProducts && (
         <div className="flex flex-col justify-center items-center py-16 text-gray-500">
           <AlertTriangle className="mb-4 w-12 h-12 text-yellow-500" />
@@ -85,7 +84,6 @@ export const Products = () => {
       )}
       {/* Renderizar productos agrupados por categoría */}
       {filteredCategories.map((category) => {
-        // Filtrar productos por searchTerm y priceFilter dentro de cada categoría
         const filteredProducts = category.products.filter(
           (p: Product) =>
             p.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -107,7 +105,7 @@ export const Products = () => {
               {filteredProducts.map((product: Product) => (
                 <div
                   key={product.id}
-                  className="flex flex-col p-4 h-full bg-white rounded-lg shadow-sm"
+                  className="flex bg-white rounded-lg flex-colh-full"
                 >
                   <Card
                     id={product.id}
