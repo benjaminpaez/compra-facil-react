@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import { useStore } from "../context/StoreContext";
-import { Search, ShoppingCart } from "lucide-react";
+import { Search, ShoppingCart, Plus } from "lucide-react";
 
 export function Navbar() {
   const { cart, setSearchTerm } = useStore();
@@ -7,13 +8,13 @@ export function Navbar() {
   const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
   return (
     <div className="flex justify-between items-center p-4 w-full max-w-6xl">
-      <div>
+      <Link to="/" className="mr-4 text-gray-500 hover:text-gray-700">
         <img
           src="../../public/logo-compra-lista.png"
           alt="logo"
           className="w-44 h-20"
         />
-      </div>
+      </Link>
 
       <section className="my-4 w-[450px]">
         <div className="hidden relative md:block">
@@ -37,11 +38,21 @@ export function Navbar() {
           <a href="#perfumes">Perfumes</a>
         </nav>
       </section>
-      <div className="relative">
-        <ShoppingCart className="w-6 h-6" />
-        <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-2 py-0.5 rounded-full">
-          {totalQuantity}
-        </span>
+
+      <div className="flex items-center gap-4">
+        <Link
+          to="/create-product"
+          className="flex items-center gap-2 px-3 py-2 bg-[#F3C623] text-black rounded-lg hover:bg-[#e6b420] transition-colors text-sm font-medium"
+        >
+          <Plus className="w-4 h-4" />
+          Crear Producto
+        </Link>
+        <Link to="/cart" className="relative">
+          <ShoppingCart className="w-6 h-6" />
+          <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-2 py-0.5 rounded-full">
+            {totalQuantity}
+          </span>
+        </Link>
       </div>
     </div>
   );
