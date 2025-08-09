@@ -1,27 +1,53 @@
 import { useParams, Link } from "react-router-dom";
-import { dataArticles, type Product } from "../response";
+import { useProductWithErrorHandling } from "../hooks/useProducts";
 import { useStore } from "../context/StoreContext";
+import { Loader2, AlertTriangle, RefreshCw } from "lucide-react";
 
 export const ProductDetail = () => {
   const { id } = useParams();
   const { addToCart, removeFromCart, cart } = useStore();
-
-  // Buscar el producto en todas las categorías
-  const findProduct = (): Product | null => {
-    for (const category of Object.values(dataArticles)) {
-      const product = category.products.find((p) => p.id === Number(id));
-      if (product) return product;
-    }
-    return null;
-  };
-
-  const product = findProduct();
+  const { product, isLoading, hasError, notFound, retry } =
+    useProductWithErrorHandling(Number(id) || 0);
 
   // Obtener la cantidad actual en el carrito
   const cartItem = cart.find((item) => item.product.id === Number(id));
   const currentCartQuantity = cartItem ? cartItem.quantity : 0;
 
-  if (!product) {
+  // Estado de carga
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-50">
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 animate-spin text-[#F3C623] mb-4 mx-auto" />
+          <p className="text-lg text-gray-600">Cargando producto...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Estado de error
+  if (hasError) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-50">
+        <div className="text-center">
+          <AlertTriangle className="w-12 h-12 text-red-500 mb-4 mx-auto" />
+          <h1 className="mb-4 text-2xl font-bold text-gray-800">
+            Error al cargar el producto
+          </h1>
+          <button
+            onClick={retry}
+            className="flex items-center gap-2 px-4 py-2 bg-[#F3C623] text-black rounded-lg hover:bg-[#e6b420] transition-colors mx-auto"
+          >
+            <RefreshCw className="w-4 h-4" />
+            Reintentar
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Producto no encontrado
+  if (notFound || !product) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-50">
         <div className="text-center">

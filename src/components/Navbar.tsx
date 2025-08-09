@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useStore } from "../context/StoreContext";
-import { Search, ShoppingCart } from "lucide-react";
+import { Search, ShoppingCart, Plus } from "lucide-react";
 
 export function Navbar() {
   const { cart, setSearchTerm } = useStore();
@@ -38,12 +38,22 @@ export function Navbar() {
           <a href="#perfumes">Perfumes</a>
         </nav>
       </section>
-      <Link to="/cart" className="relative">
-        <ShoppingCart className="w-6 h-6" />
-        <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-2 py-0.5 rounded-full">
-          {totalQuantity}
-        </span>
-      </Link>
+
+      <div className="flex items-center gap-4">
+        <Link
+          to="/create-product"
+          className="flex items-center gap-2 px-3 py-2 bg-[#F3C623] text-black rounded-lg hover:bg-[#e6b420] transition-colors text-sm font-medium"
+        >
+          <Plus className="w-4 h-4" />
+          Crear Producto
+        </Link>
+        <Link to="/cart" className="relative">
+          <ShoppingCart className="w-6 h-6" />
+          <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-2 py-0.5 rounded-full">
+            {totalQuantity}
+          </span>
+        </Link>
+      </div>
     </div>
   );
 }

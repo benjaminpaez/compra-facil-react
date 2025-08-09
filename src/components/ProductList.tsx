@@ -1,5 +1,6 @@
 import { Products } from "./Products";
 import { SidebarFilters } from "./SidebarFilters";
+import { ProductDebugInfo } from "./ProductDebugInfo";
 
 export const ProductList = () => {
   return (
@@ -9,6 +10,7 @@ export const ProductList = () => {
           <SidebarFilters />
         </aside>
         <section className="flex-1">
+          <ProductDebugInfo />
           <Products />
         </section>
       </div>

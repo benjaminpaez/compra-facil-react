@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ProductList } from "./components/ProductList";
 import { ProductDetail } from "./components/ProductDetail";
+import { CreateProduct } from "./components/CreateProduct";
 import Cart from "./components/Cart";
 import { Checkout } from "./components/Checkout";
 import { NotFound } from "./components/NotFound";
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<ProductList />} />
             <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/create-product" element={<CreateProduct />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="*" element={<NotFound />} />
