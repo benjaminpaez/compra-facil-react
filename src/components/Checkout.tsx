@@ -74,7 +74,6 @@ export const Checkout = () => {
               Elegí la forma de entrega
             </h1>
 
-            {/* Opción de retiro en sucursal (opcional) */}
             <div className="p-6 bg-white rounded-lg border border-gray-200 shadow-sm">
               <div className="flex justify-between items-start">
                 <div className="flex items-start space-x-3">
@@ -99,7 +98,6 @@ export const Checkout = () => {
               </div>
             </div>
 
-            {/* Selección de método de pago */}
             <div className="p-6 bg-white rounded-lg shadow-sm">
               <h2 className="mb-4 text-lg font-bold text-gray-900">
                 Elegí cómo pagar
@@ -137,7 +135,6 @@ export const Checkout = () => {
                   </div>
                 </div>
 
-                {/* Opción Mastercard */}
                 <div className="p-4 rounded-lg border border-gray-200">
                   <div className="flex items-center space-x-3">
                     <input
@@ -229,7 +226,7 @@ export const Checkout = () => {
                 </div>
               </div>
 
-              {/* Lista de productos (opcional, para mostrar qué se está comprando) */}
+              {/* Lista de productos  */}
               <div className="pt-4 mt-4 border-t border-gray-200">
                 <h3 className="mb-2 text-sm font-medium text-gray-900">
                   Productos en tu compra:
